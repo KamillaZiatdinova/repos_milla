@@ -9,11 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Kamilla Ziatdinova" />
 
-<meta name="date" content="2022-10-19" />
 
-<title>Основы обработки данных с помощью R</title>
+<title>lab-3</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,9 +348,6 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Основы обработки данных с помощью R</h1>
-<h4 class="author">Kamilla Ziatdinova</h4>
-<h4 class="date">2022-10-19</h4>
 
 </div>
 
@@ -375,71 +370,27 @@ group_by()</li>
 </div>
 <div id="подготовка" class="section level2">
 <h2>Подготовка</h2>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Присоединяю пакет: &#39;dplyr&#39;</code></pre>
-<pre><code>## Следующие объекты скрыты от &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## Следующие объекты скрыты от &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>starwars</code></pre>
-<pre><code>## # A tibble: 87 × 14
-##    name        height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
-##    &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
-##  1 Luke Skywa…    172    77 blond   fair    blue       19   male  mascu… Tatooi…
-##  2 C-3PO          167    75 &lt;NA&gt;    gold    yellow    112   none  mascu… Tatooi…
-##  3 R2-D2           96    32 &lt;NA&gt;    white,… red        33   none  mascu… Naboo  
-##  4 Darth Vader    202   136 none    white   yellow     41.9 male  mascu… Tatooi…
-##  5 Leia Organa    150    49 brown   light   brown      19   fema… femin… Aldera…
-##  6 Owen Lars      178   120 brown,… light   blue       52   male  mascu… Tatooi…
-##  7 Beru White…    165    75 brown   light   blue       47   fema… femin… Tatooi…
-##  8 R5-D4           97    32 &lt;NA&gt;    white,… red        NA   none  mascu… Tatooi…
-##  9 Biggs Dark…    183    84 black   light   brown      24   male  mascu… Tatooi…
-## 10 Obi-Wan Ke…    182    77 auburn… fair    blue-g…    57   male  mascu… Stewjon
-## # … with 77 more rows, 4 more variables: species &lt;chr&gt;, films &lt;list&gt;,
-## #   vehicles &lt;list&gt;, starships &lt;list&gt;, and abbreviated variable names
-## #   ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
-<pre class="r"><code>starwars &lt;- starwars</code></pre>
+<p>library(dplyr) starwars starwars &lt;- starwars</p>
 </div>
 <div id="задание-1" class="section level2">
 <h2>Задание 1</h2>
 <div id="сколько-строк-в-датафрейме" class="section level3">
 <h3>Сколько строк в датафрейме?</h3>
-<pre class="r"><code>starwars %&gt;% nrow()</code></pre>
-<pre><code>## [1] 87</code></pre>
+<p>starwars %&gt;% nrow()</p>
 </div>
 </div>
 <div id="задание-2" class="section level2">
 <h2>Задание 2</h2>
 <div id="сколько-столбцов-в-датафрейме" class="section level3">
 <h3>Сколько столбцов в датафрейме?</h3>
-<pre class="r"><code>starwars %&gt;% ncol()</code></pre>
-<pre><code>## [1] 14</code></pre>
+<p>starwars %&gt;% ncol()</p>
 </div>
 </div>
 <div id="задание-3" class="section level2">
 <h2>Задание 3</h2>
 <div id="как-просмотреть-примерный-вид-датафрейма" class="section level3">
 <h3>Как просмотреть примерный вид датафрейма?</h3>
-<pre class="r"><code>starwars %&gt;% glimpse()</code></pre>
-<pre><code>## Rows: 87
-## Columns: 14
-## $ name       &lt;chr&gt; &quot;Luke Skywalker&quot;, &quot;C-3PO&quot;, &quot;R2-D2&quot;, &quot;Darth Vader&quot;, &quot;Leia Or…
-## $ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…
-## $ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…
-## $ hair_color &lt;chr&gt; &quot;blond&quot;, NA, NA, &quot;none&quot;, &quot;brown&quot;, &quot;brown, grey&quot;, &quot;brown&quot;, N…
-## $ skin_color &lt;chr&gt; &quot;fair&quot;, &quot;gold&quot;, &quot;white, blue&quot;, &quot;white&quot;, &quot;light&quot;, &quot;light&quot;, &quot;…
-## $ eye_color  &lt;chr&gt; &quot;blue&quot;, &quot;yellow&quot;, &quot;red&quot;, &quot;yellow&quot;, &quot;brown&quot;, &quot;blue&quot;, &quot;blue&quot;,…
-## $ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …
-## $ sex        &lt;chr&gt; &quot;male&quot;, &quot;none&quot;, &quot;none&quot;, &quot;male&quot;, &quot;female&quot;, &quot;male&quot;, &quot;female&quot;,…
-## $ gender     &lt;chr&gt; &quot;masculine&quot;, &quot;masculine&quot;, &quot;masculine&quot;, &quot;masculine&quot;, &quot;femini…
-## $ homeworld  &lt;chr&gt; &quot;Tatooine&quot;, &quot;Tatooine&quot;, &quot;Naboo&quot;, &quot;Tatooine&quot;, &quot;Alderaan&quot;, &quot;T…
-## $ species    &lt;chr&gt; &quot;Human&quot;, &quot;Droid&quot;, &quot;Droid&quot;, &quot;Human&quot;, &quot;Human&quot;, &quot;Human&quot;, &quot;Huma…
-## $ films      &lt;list&gt; &lt;&quot;The Empire Strikes Back&quot;, &quot;Revenge of the Sith&quot;, &quot;Return…
-## $ vehicles   &lt;list&gt; &lt;&quot;Snowspeeder&quot;, &quot;Imperial Speeder Bike&quot;&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, &quot;Imp…
-## $ starships  &lt;list&gt; &lt;&quot;X-wing&quot;, &quot;Imperial shuttle&quot;&gt;, &lt;&gt;, &lt;&gt;, &quot;TIE Advanced x1&quot;,…</code></pre>
+<p>starwars %&gt;% glimpse()</p>
 </div>
 </div>
 <div id="задание-4" class="section level2">
@@ -447,67 +398,24 @@ group_by()</li>
 <div id="сколько-уникальных-рас-персонажей-species-представлено-в-данных" class="section level3">
 <h3>Сколько уникальных рас персонажей (species) представлено в
 данных?</h3>
-<pre class="r"><code>length(unique(starwars$species))</code></pre>
-<pre><code>## [1] 38</code></pre>
+<p>length(unique(starwars$species))</p>
 </div>
 </div>
 <div id="задание-5" class="section level2">
 <h2>Задание 5</h2>
 <div id="найти-самого-высокого-персонажа." class="section level3">
 <h3>Найти самого высокого персонажа.</h3>
-<pre class="r"><code>na.omit(starwars$height)</code></pre>
-<pre><code>##  [1] 172 167  96 202 150 178 165  97 183 182 188 180 228 180 173 175 170 180  66
-## [20] 170 183 200 190 177 175 180 150  88 160 193 191 170 196 224 206 183 137 112
-## [39] 183 163 175 180 178  94 122 163 188 198 196 171 184 188 264 188 196 185 157
-## [58] 183 183 170 166 165 193 191 183 168 198 229 213 167  79  96 193 191 178 216
-## [77] 234 188 178 206 165
-## attr(,&quot;na.action&quot;)
-## [1] 28 82 83 84 85 86
-## attr(,&quot;class&quot;)
-## [1] &quot;omit&quot;</code></pre>
-<pre class="r"><code>max(starwars$height)</code></pre>
-<pre><code>## [1] NA</code></pre>
-<pre class="r"><code>starwars %&gt;% filter(height==max(na.omit(starwars$height)))</code></pre>
-<pre><code>## # A tibble: 1 × 14
-##   name        height  mass hair_c…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
-##   &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
-## 1 Yarael Poof    264    NA none     white   yellow       NA male  mascu… Quermia
-## # … with 4 more variables: species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;,
-## #   starships &lt;list&gt;, and abbreviated variable names ¹​hair_color, ²​skin_color,
-## #   ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
+<p>na.omit(starwars<span class="math inline">\(height)
+max(starwars\)</span>height) starwars %&gt;%
+filter(height==max(na.omit(starwars$height)))</p>
 </div>
 </div>
 <div id="задание-6" class="section level2">
 <h2>Задание 6</h2>
 <div id="найти-всех-персонажей-ниже-170." class="section level3">
 <h3>Найти всех персонажей ниже 170.</h3>
-<pre class="r"><code>na.omit(starwars$height)</code></pre>
-<pre><code>##  [1] 172 167  96 202 150 178 165  97 183 182 188 180 228 180 173 175 170 180  66
-## [20] 170 183 200 190 177 175 180 150  88 160 193 191 170 196 224 206 183 137 112
-## [39] 183 163 175 180 178  94 122 163 188 198 196 171 184 188 264 188 196 185 157
-## [58] 183 183 170 166 165 193 191 183 168 198 229 213 167  79  96 193 191 178 216
-## [77] 234 188 178 206 165
-## attr(,&quot;na.action&quot;)
-## [1] 28 82 83 84 85 86
-## attr(,&quot;class&quot;)
-## [1] &quot;omit&quot;</code></pre>
-<pre class="r"><code>starwars %&gt;% filter(height&lt;170)</code></pre>
-<pre><code>## # A tibble: 23 × 14
-##    name        height  mass hair_…¹ skin_…² eye_c…³ birth…⁴ sex   gender homew…⁵
-##    &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  
-##  1 C-3PO          167    75 &lt;NA&gt;    gold    yellow      112 none  mascu… Tatooi…
-##  2 R2-D2           96    32 &lt;NA&gt;    white,… red          33 none  mascu… Naboo  
-##  3 Leia Organa    150    49 brown   light   brown        19 fema… femin… Aldera…
-##  4 Beru White…    165    75 brown   light   blue         47 fema… femin… Tatooi…
-##  5 R5-D4           97    32 &lt;NA&gt;    white,… red          NA none  mascu… Tatooi…
-##  6 Yoda            66    17 white   green   brown       896 male  mascu… &lt;NA&gt;   
-##  7 Mon Mothma     150    NA auburn  fair    blue         48 fema… femin… Chandr…
-##  8 Wicket Sys…     88    20 brown   brown   brown         8 male  mascu… Endor  
-##  9 Nien Nunb      160    68 none    grey    black        NA male  mascu… Sullust
-## 10 Watto          137    NA black   blue, … yellow       NA male  mascu… Toydar…
-## # … with 13 more rows, 4 more variables: species &lt;chr&gt;, films &lt;list&gt;,
-## #   vehicles &lt;list&gt;, starships &lt;list&gt;, and abbreviated variable names
-## #   ¹​hair_color, ²​skin_color, ³​eye_color, ⁴​birth_year, ⁵​homeworld</code></pre>
+<p>na.omit(starwars$height)</p>
+<p>starwars %&gt;% filter(height&lt;170)</p>
 </div>
 </div>
 <div id="задание-7" class="section level2">
@@ -516,23 +424,8 @@ group_by()</li>
 <h3>Подсчитать ИМТ (индекс массы тела) для всех персонажей. ИМТ
 подсчитать по формуле 𝐼 = 𝑚/ℎ2 , где 𝑚– масса (weight), а ℎ – рост
 (height).</h3>
-<pre class="r"><code>starwars %&gt;%
-  mutate(imt = mass / ((height*0.01) ^ 2)) %&gt;%
-  select(name,imt)</code></pre>
-<pre><code>## # A tibble: 87 × 2
-##    name                 imt
-##    &lt;chr&gt;              &lt;dbl&gt;
-##  1 Luke Skywalker      26.0
-##  2 C-3PO               26.9
-##  3 R2-D2               34.7
-##  4 Darth Vader         33.3
-##  5 Leia Organa         21.8
-##  6 Owen Lars           37.9
-##  7 Beru Whitesun lars  27.5
-##  8 R5-D4               34.0
-##  9 Biggs Darklighter   25.1
-## 10 Obi-Wan Kenobi      23.2
-## # … with 77 more rows</code></pre>
+<p>starwars %&gt;% mutate(imt = mass / ((height*0.01) ^ 2)) %&gt;%
+select(name,imt)</p>
 </div>
 </div>
 <div id="задание-8" class="section level2">
@@ -540,24 +433,9 @@ group_by()</li>
 <div id="найти-10-самых-вытянутых-персонажей.-вытянутость-оценить-по-отношению-массы-mass-к-росту-height-персонажей." class="section level3">
 <h3>Найти 10 самых “вытянутых” персонажей. “Вытянутость” оценить по
 отношению массы (mass) к росту (height) персонажей.</h3>
-<pre class="r"><code>starwars %&gt;%
-  mutate(elongation = mass/(height*0.01)) %&gt;%
-  arrange(desc(elongation)) %&gt;%
-  head(10) %&gt;%
-  select(name,elongation)</code></pre>
-<pre><code>## # A tibble: 10 × 2
-##    name                  elongation
-##    &lt;chr&gt;                      &lt;dbl&gt;
-##  1 Jabba Desilijic Tiure      776  
-##  2 Grievous                    73.6
-##  3 IG-88                       70  
-##  4 Owen Lars                   67.4
-##  5 Darth Vader                 67.3
-##  6 Jek Tono Porkins            61.1
-##  7 Bossk                       59.5
-##  8 Tarfful                     58.1
-##  9 Dexter Jettster             51.5
-## 10 Chewbacca                   49.1</code></pre>
+<p>starwars %&gt;% mutate(elongation = mass/(height*0.01)) %&gt;%
+arrange(desc(elongation)) %&gt;% head(10) %&gt;%
+select(name,elongation)</p>
 </div>
 </div>
 <div id="задание-9" class="section level2">
@@ -565,29 +443,9 @@ group_by()</li>
 <div id="найти-средний-возраст-персонажей-каждой-расы-вселенной-звездных-войн." class="section level3">
 <h3>Найти средний возраст персонажей каждой расы вселенной Звездных
 войн.</h3>
-<pre class="r"><code>starwars %&gt;%
-  filter(!(birth_year %in% NA)) %&gt;% 
-  filter(!(species %in% NA)) %&gt;%
-  group_by(species) %&gt;%
-  summarise(mean_age = mean(birth_year))</code></pre>
-<pre><code>## # A tibble: 15 × 2
-##    species        mean_age
-##    &lt;chr&gt;             &lt;dbl&gt;
-##  1 Cerean             92  
-##  2 Droid              53.3
-##  3 Ewok                8  
-##  4 Gungan             52  
-##  5 Human              53.4
-##  6 Hutt              600  
-##  7 Kel Dor            22  
-##  8 Mirialan           49  
-##  9 Mon Calamari       41  
-## 10 Rodian             44  
-## 11 Trandoshan         53  
-## 12 Twi&#39;lek            48  
-## 13 Wookiee           200  
-## 14 Yoda&#39;s species    896  
-## 15 Zabrak             54</code></pre>
+<p>starwars %&gt;% filter(!(birth_year %in% NA)) %&gt;% filter(!(species
+%in% NA)) %&gt;% group_by(species) %&gt;% summarise(mean_age =
+mean(birth_year))</p>
 </div>
 </div>
 <div id="задание-10" class="section level2">
@@ -595,14 +453,8 @@ group_by()</li>
 <div id="найти-самый-распространенный-цвет-глаз-персонажей-вселенной-звездных-войн." class="section level3">
 <h3>Найти самый распространенный цвет глаз персонажей вселенной Звездных
 войн.</h3>
-<pre class="r"><code>starwars %&gt;%
-  filter(!(eye_color %in% NA)) %&gt;%
-  count(eye_color, sort = TRUE) %&gt;%
-  head(1)</code></pre>
-<pre><code>## # A tibble: 1 × 2
-##   eye_color     n
-##   &lt;chr&gt;     &lt;int&gt;
-## 1 brown        21</code></pre>
+<p>starwars %&gt;% filter(!(eye_color %in% NA)) %&gt;% count(eye_color,
+sort = TRUE) %&gt;% head(1)</p>
 </div>
 </div>
 <div id="задание-11" class="section level2">
@@ -610,24 +462,8 @@ group_by()</li>
 <div id="подсчитать-среднюю-длину-имени-в-каждой-расе-вселенной-звездных-войн." class="section level3">
 <h3>Подсчитать среднюю длину имени в каждой расе вселенной Звездных
 войн.</h3>
-<pre class="r"><code>starwars %&gt;%
-  filter(!(species %in% NA)) %&gt;%
-  group_by(species) %&gt;%
-  summarise(mean_len_name = mean(nchar(name)))</code></pre>
-<pre><code>## # A tibble: 37 × 2
-##    species   mean_len_name
-##    &lt;chr&gt;             &lt;dbl&gt;
-##  1 Aleena            13   
-##  2 Besalisk          15   
-##  3 Cerean            12   
-##  4 Chagrian          10   
-##  5 Clawdite          10   
-##  6 Droid              4.83
-##  7 Dug                7   
-##  8 Ewok              21   
-##  9 Geonosian         17   
-## 10 Gungan            11.7 
-## # … with 27 more rows</code></pre>
+<p>starwars %&gt;% filter(!(species %in% NA)) %&gt;% group_by(species)
+%&gt;% summarise(mean_len_name = mean(nchar(name)))</p>
 </div>
 </div>
 

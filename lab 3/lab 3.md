@@ -108,11 +108,3 @@ starwars %>%
   filter(!(species %in% NA)) %>%
   group_by(species) %>%
   summarise(mean_len_name = mean(nchar(name)))
-
-
-
-
-  
- 
- 
- 
