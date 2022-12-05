@@ -95,3 +95,4 @@ a <-filter(flights,year == 2013) %>%
   head(1) %>%
   select(carrier) %>% paste(sep='')
 filter(airlines,carrier==a)
+
